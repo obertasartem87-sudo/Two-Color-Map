@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10172a">
+  <meta name="description" content="Two-Color Map — головоломка, прогрес, рейтинги та турніри.">
+  <title>Two-Color Map — Team Architectors</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>try{var t=localStorage.getItem("tcm_theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="dark"}</script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Two-Color Map home">
+        <span class="brand-mark">◧</span>
+        <span><b>TWO-COLOR MAP</b><small>TEAM ARCHITECTORS</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Головна навігація">
+        <button class="nav-item active" data-page="home"><span>⌂</span> Головна</button>
+        <button class="nav-item" data-page="game"><span>▦</span> Грати</button>
+        <button class="nav-item" data-page="ratings"><span>♜</span> Рейтинги</button>
+        <button class="nav-item" data-page="competitions"><span>⚔</span> Змагання</button>
+        <button class="nav-item" data-page="tournaments"><span>🏆</span> Турніри</button>
+        <button class="nav-item" data-page="profile"><span>◉</span> Профіль</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="online-dot"></div><span>Працює без сервера</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><span class="eyebrow" id="page-eyebrow">ІГРОВА ПЛАТФОРМА</span><h1 id="page-title">Твоя карта пригод</h1></div>
+        <div class="top-actions">
+          <select class="icon-btn" id="lang-select" title="Мова" aria-label="Language"></select>
+          <button class="icon-btn" id="theme-toggle" title="Змінити тему">☀</button>
+          <button class="profile-chip" data-page="profile"><span class="avatar" id="chip-avatar">Г</span><span><b id="chip-name">Гість</b><small id="chip-sub">Створи профіль</small></span></button>
+        </div>
+      </header>
+
+      <section class="page active" id="page-home">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="pill">НОВИЙ СЕЗОН</span>
+            <h2>Думай стратегічно.<br><em>Думай нелогічно.</em></h2>
+            <p>Проходь світи, покращуй свої результати та змагайся з друзями.</p>
+            <button class="primary-btn" data-page="game">Почати грати <span>→</span></button>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="mini-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="floating-star">★</div>
+          </div>
+        </div>
+        <div class="section-heading"><div><span class="eyebrow">ТВІЙ ПРОГРЕС</span><h2>Повернися до гри</h2></div><button class="text-btn" data-page="game">Усі світи →</button></div>
+        <div class="stat-grid">
+          <article class="stat-card"><span class="stat-icon blue">▦</span><span class="stat-label">Пройдено рівнів</span><strong id="stat-levels">0 <small>рівнів</small></strong></article>
+          <article class="stat-card"><span class="stat-icon gold">★</span><span class="stat-label">Зібрано зірок</span><strong id="stat-stars">0 <small>зірок</small></strong></article>
+          <article class="stat-card"><span class="stat-icon purple">◷</span><span class="stat-label">Найкращий час</span><strong id="stat-best">—</strong><small class="muted" id="stat-best-sub">Пройди перший рівень</small></article>
+          <article class="stat-card"><span class="stat-icon green">♜</span><span class="stat-label">Рейтинг матчів</span><strong>—</strong><small class="muted">Ще немає матчів</small></article>
+        </div>
+        <div class="section-heading"><div><span class="eyebrow">СПІЛЬНОТА</span><h2>На платформі</h2></div></div>
+        <div class="feature-grid">
+          <article class="feature-card" data-page="ratings"><span>🏅</span><h3>Рейтинги</h3><p>Порівнюй прогрес, зірки та найкращий час.</p><b>Переглянути рейтинги →</b></article>
+          <article class="feature-card" data-page="competitions"><span>⚡</span><h3>Змагання</h3><p>Грай матчі з друзями на одному пристрої.</p><b>Почати матч →</b></article>
+          <article class="feature-card" data-page="tournaments"><span>🏆</span><h3>Турніри</h3><p>Створюй власні чемпіонати та грай їх.</p><b>Відкрити турніри →</b></article>
+        </div>
+      </section>
+
+      <section class="page" id="page-game">
+        <div class="page-intro"><p>Проходь рівні у власному темпі. Результати зберігаються в профілі.</p></div>
+        <div class="world-grid" id="world-grid"></div>
+        <div class="more-wrap"><button class="secondary-btn" id="more-worlds">Показати ще світи ↓</button></div>
+      </section>
+
+      <section class="page" id="page-ratings">
+        <div class="page-intro"><p>Кожен рейтинг вимірює окреме досягнення.</p></div>
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-rating="progress">Прогрес</button><button class="tab" data-rating="stars">Зірки</button><button class="tab" data-rating="speed">Швидкість</button><button class="tab" data-rating="tournament">Турніри</button>
+        </div>
+        <div class="table-card"><div class="table-title"><h3 id="rating-heading">Найбільше пройдених рівнів</h3></div><div id="rating-table"></div></div>
+        <div class="notice">Рейтинги враховують профілі, створені на цьому пристрої.</div>
+      </section>
+
+      <section class="page" id="page-competitions">
+        <div class="page-intro"><p>Двоє гравців, одне поле, чесне порівняння результатів.</p></div>
+        <div class="notice" id="guest-note-c" hidden>Гість може лише грати. Створи профіль, щоб брати участь у змаганнях, турнірах і рейтингах.</div>
+        <div class="table-card match-setup"><div class="auth-row"><label>Гравець 1<select id="m-p1"></select></label><label>Гравець 2<input id="m-p2" placeholder="Пошта або нікнейм" maxlength="254"></label><label>Пароль<input id="m-p2pass" type="password" autocomplete="off"></label><label>Поле<select id="m-size"><option>3</option><option>4</option><option>5</option><option>6</option></select></label></div></div>
+        <div class="competition-grid">
+          <article class="competition-card accent-blue"><span class="large-icon">⚡</span><h3>Швидкий матч</h3><p>Обидва розв'язують головоломку на однаковому полі. Перемагає швидший.</p><button class="primary-btn" id="quick-match">Почати матч</button></article>
+          <article class="competition-card accent-purple"><span class="large-icon">✦</span><h3>Гра на результат</h3><p>Три головоломки поспіль. Рахуються зірки, а за рівності — час.</p><button class="secondary-btn" id="challenge-match">Почати виклик</button></article>
+        </div>
+        <div class="notice" id="match-result" hidden></div>
+        <div class="notice">Матчі проходять на одному пристрої: гравці грають по черзі. Результати змінюють рейтинг (Elo).</div>
+      </section>
+
+      <section class="page" id="page-tournaments">
+        <div class="page-intro"><p>Плануй турніри та стеж за турнірною сіткою.</p></div>
+        <div class="tournament-banner"><div><span class="pill">НА ЦЬОМУ ПРИСТРОЇ</span><h3>Твій перший чемпіонат</h3><p>Турніри на вибування та круговий формат.</p></div><span class="trophy-art">🏆</span></div>
+        <div class="notice" id="guest-note-t" hidden style="margin:0 0 15px">Гість може лише грати. Створи профіль, щоб брати участь у змаганнях, турнірах і рейтингах.</div>
+        <div class="table-card"><div class="table-title"><h3>Створити турнір</h3></div>
+          <form class="auth-form" id="tour-form"><input id="t-title" placeholder="Назва турніру" maxlength="40" required><select id="t-format"><option value="single_elimination">На вибування</option><option value="round_robin">Круговий</option></select><select id="t-size"><option value="3">3×3</option><option value="4">4×4</option><option value="5">5×5</option><option value="6">6×6</option></select><textarea id="t-players" rows="3" placeholder="Учасники через кому або з нового рядка (2–16)" required></textarea><button class="primary-btn" type="submit">Створити турнір</button><div class="auth-msg" id="t-msg"></div></form></div>
+        <div class="table-card" style="margin-top:15px"><div class="table-title"><h3>Турніри</h3></div><div id="tour-list"></div></div>
+        <div class="table-card" id="tour-detail" style="margin-top:15px" hidden></div>
+      </section>
+
+      <section class="page" id="page-profile">
+        <div class="page-intro"><p>Твоя історія, досягнення та результати в одному місці.</p></div>
+        <div class="profile-panel"><div class="avatar big" id="pf-avatar">Г</div><div><h3 id="pf-name">Гість</h3><p class="muted" id="pf-sub">Профіль на цьому пристрої</p>
+          <div class="tabs" id="auth-tabs"><button class="tab active" data-auth-tab="login">Вхід</button><button class="tab" data-auth-tab="signup">Реєстрація</button></div>
+          <form class="auth-form" id="login-form"><input id="li-login" placeholder="Пошта або нікнейм" autocomplete="username" required><input id="li-pass" type="password" placeholder="Пароль" autocomplete="current-password" required><button class="primary-btn" type="submit">Увійти</button><div class="auth-msg" id="li-msg"></div></form>
+          <form class="auth-form" id="signup-form" hidden><input id="su-email" type="email" placeholder="Пошта" autocomplete="email" required><input id="su-name" placeholder="Нікнейм" maxlength="20" autocomplete="nickname" required><input id="su-pass" type="password" placeholder="Пароль" autocomplete="new-password" required><input id="su-pass2" type="password" placeholder="Повтори пароль" autocomplete="new-password" required><button class="primary-btn" type="submit">Зареєструватися</button><div class="auth-msg" id="su-msg"></div></form>
+          <button class="secondary-btn" id="logout-btn" hidden>Вийти</button>
+          <p class="muted" id="auth-note" style="max-width:340px;line-height:1.5;margin-top:12px">Акаунт зберігається лише в браузері цього пристрою. Пошту не можна підтвердити без сервера, а пароль відновити не вийде.</p></div></div>
+        <div class="table-card" style="margin-bottom:15px"><div class="table-title"><h3>Профілі на цьому пристрої</h3></div><div class="auth-row"><button class="secondary-btn" id="export-btn">Зберегти у файл</button><button class="secondary-btn" id="import-btn">Завантажити з файлу</button><input type="file" id="import-file" accept="application/json" hidden></div></div>
+        <div class="stat-grid compact">
+          <article class="stat-card"><span class="stat-label">Рівні</span><strong id="p-levels">0</strong></article><article class="stat-card"><span class="stat-label">Зірки</span><strong id="p-stars">0 ★</strong></article><article class="stat-card"><span class="stat-label">Матчі</span><strong id="p-matches">0</strong></article><article class="stat-card"><span class="stat-label">Перемоги</span><strong id="p-wins">0</strong></article>
+        </div>
+        <div class="notice">Профілі зберігаються лише в браузері цього пристрою. Щоб перенести прогрес, збережи його у файл.</div>
+      </section>
+
+      <footer class="footer">© 2026 Team Architectors · Two-Color Map <span>Зроблено для тих, хто любить думати</span></footer>
+    </main>
+  </div>
+  <div class="modal" id="game-modal" hidden><div class="modal-card game-card">
+    <div class="modal-head"><div><b id="gm-title"></b><small id="gm-info"></small></div><div class="gm-stats"><span>👣 <b id="gm-moves">0</b></span><span id="gm-timer">0:00</span></div></div>
+    <div class="game-layout">
+      <div class="game-main">
+        <div class="board-wrap"><div class="puzzle" id="gm-grid"></div>
+          <div class="win-badge" id="gm-win" hidden><div class="win-icon">🏆</div><b>Чудова робота! 🎉</b><span class="win-stars" id="gm-win-stars"></span><small id="gm-win-time"></small></div></div>
+        <div class="game-actions"><button class="secondary-btn" id="gm-undo">↶ <span>Назад</span></button><button class="secondary-btn" id="gm-reset">⟲ <span>Скинути</span></button><button class="primary-btn" id="gm-check">✔ <span>Перевірити</span></button></div>
+        <div class="legend"><span><i class="dot r"></i> R = <b>Червоний</b></span><span><i class="dot b"></i> B = <b>Синій</b></span></div>
+      </div>
+      <aside class="game-rules"><h4>Вимоги до карти</h4><div class="rule-card" id="gm-r1"><span class="ri">–</span><div><b>Різноманіття стовпчиків</b><small>У кожному стовпці є принаймні одна R та B клітинка.</small></div></div><div class="rule-card" id="gm-r2"><span class="ri">–</span><div><b>Зв'язний червоний край</b><small>Усі червоні клітинки торкаються одна одної (1 суцільна група).</small></div></div><div class="rule-card" id="gm-r3"><span class="ri">–</span><div><b>Зв'язний синій край</b><small>Усі сині клітинки торкаються одна одної (1 суцільна група).</small></div></div><div class="rule-card" id="gm-r4"><span class="ri">–</span><div><b>Немає квадратів 2×2 одного кольору</b><small>Жоден квадрат 2×2 не може бути повністю червоним або синім.</small></div></div><div class="feedback" id="gm-feedback"></div></aside>
+    </div>
+    <div class="modal-foot"><button class="secondary-btn" id="gm-cancel">Закрити</button><button class="primary-btn" id="gm-next" hidden></button></div></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/i18n-data1.js"></script>
+  <script src="js/i18n-data2.js"></script>
+  <script src="js/i18n-data3.js"></script>
+  <script src="js/i18n-data4.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/leaderboard.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/competitions.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
