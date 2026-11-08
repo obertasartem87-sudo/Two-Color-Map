@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    match /users/{uid} {
+      allow read: if true;
+      allow create: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.username is string
+        && request.resource.data.username.size() >= 3 && request.resource.data.username.size() <= 20
+        && !('tournamentRating' in request.resource.data);
+      allow update: if request.auth != null && request.auth.uid == uid
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['tournamentRating'])
+        && request.resource.data.username.size() >= 3 && request.resource.data.username.size() <= 20;
+      allow delete: if false;
+    }
+  }
+}
+// УВАГА: клієнт сам пише свої очки, тож це не захист від читерства.
+// Для чесних рейтингів перенеси перевірку результатів у Cloud Functions.
